@@ -15,9 +15,9 @@ public class Component extends Good {
 
     private TypeComponent typeComponent;
 
-    public Component (double price, TypeComponent component) {
+
+    public Component (double price) {
         super(price);
-        this.typeComponent = component;
     }
 
     @Override

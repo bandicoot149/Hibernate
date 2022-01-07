@@ -15,6 +15,11 @@ public class Accessory extends Good {
 
     private TypeAccessory typeAccessory;
 
+    public Accessory (double price) {
+        super(price);
+    }
+
+
     @Override
     public String toString() {
         return "Accessory{" + "typeAccessory=" + typeAccessory + '}';

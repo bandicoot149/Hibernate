@@ -7,7 +7,9 @@ import com.shop.model.good.bike.TypeBike;
 import java.util.Random;
 
 public class PromotionGenerator {
-    public static Promotion generate() {
+
+
+    public Promotion generate() {
         Random random = new Random();
         Promotion promotion = new Promotion();
         promotion.setBrand(Brand.values()[random.nextInt(Brand.values().length)]);

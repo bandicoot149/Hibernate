@@ -5,12 +5,13 @@ import com.shop.model.good.accessory.TypeAccessory;
 
 import java.util.Random;
 
+
 public class AccessoryGenerator {
-    public static Accessory generate() {
+
+    public Accessory generate() {
         Random random = new Random();
-        Accessory accessory = new Accessory();
+        Accessory accessory = new Accessory(random.nextInt(50) + 10);
         accessory.setTypeAccessory(TypeAccessory.values()[random.nextInt(TypeAccessory.values().length)]);
-        accessory.setPrice(random.nextInt(50) + 10);
         return accessory;
     }
 }

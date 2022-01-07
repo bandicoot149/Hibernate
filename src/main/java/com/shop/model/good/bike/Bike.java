@@ -16,11 +16,9 @@ public class Bike extends Good {
     private TypeBike typeBike;
     private int frameSize;
 
-    public Bike (double price, Brand brand, TypeBike typeBike, int frameSize) {
+
+    public Bike (double price) {
         super(price);
-        this.brand = brand;
-        this.typeBike = typeBike;
-        this.frameSize = frameSize;
     }
 
 

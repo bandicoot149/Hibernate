@@ -5,21 +5,27 @@ import com.shop.model.good.bike.Brand;
 import com.shop.model.good.bike.TypeBike;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.UUID;
 
 @Data
-@NoArgsConstructor
 @Entity
-@Table(name = "Promotion")
+@Table
 public class Promotion {
     @Id
-    @GeneratedValue
     private UUID id;
     private Brand brand;
     private TypeBike typeBike;
     private int percent;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "shop_id")
+    private Shop shop;
+
+    public Promotion () {
+        this.id = UUID.randomUUID();
+    }
 
     @Override
     public String toString() {

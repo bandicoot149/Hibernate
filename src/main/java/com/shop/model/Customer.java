@@ -19,16 +19,16 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "Customer")
+@Table(name = "customer")
 public class Customer {
     @Id
     @GeneratedValue
     private UUID id;
     public String name;
     private double balance;
-    @OneToMany()
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true, fetch= FetchType.EAGER)
     private List<Good> shoppingCart = new ArrayList<>();
-    @OneToMany()
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true, fetch= FetchType.EAGER)
     private List<Good> purchasedGoods = new ArrayList<>();
     private TypeBike neededTypeBike;
     private int neededMinFrameSizeBike;
@@ -37,6 +37,7 @@ public class Customer {
     private TypeComponent neededComponent;
 
     public Customer(String name, double balance) {
+
         this.name = name;
         this.balance = balance;
     }

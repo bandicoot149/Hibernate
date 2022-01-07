@@ -8,20 +8,34 @@ import com.shop.model.good.component.Component;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import javax.persistence.*;
+import java.util.*;
 
 @Data
 @NoArgsConstructor
+@Entity
+@Table
 public class Shop {
-    private double balance = 0;
-    private List<Promotion> promotions;
-    private List<Bike> bikes;
-    private List<Accessory> accessories;
-    private List<Component> components;
 
-    public Shop(double balance, List<Promotion> promotions, List<Bike> bikes, List<Accessory> accessories, List<Component> components) {
+    @Id
+    private UUID id;
+
+    private double balance = 0;
+    @OneToMany
+    @JoinColumn(name = "shop_id")
+    private Set<Promotion> promotions;
+    @OneToMany
+    @JoinColumn(name = "shop_id")
+    private Set<Bike> bikes;
+    @OneToMany
+    @JoinColumn(name = "shop_id")
+    private Set<Accessory> accessories;
+    @OneToMany
+    @JoinColumn(name = "shop_id")
+    private Set<Component> components;
+
+    public Shop(double balance, Set<Promotion> promotions, Set<Bike> bikes, Set<Accessory> accessories, Set<Component> components) {
+        this.id = UUID.randomUUID();
         this.balance = balance;
         this.promotions = promotions;
         this.bikes = bikes;
@@ -54,5 +68,10 @@ public class Shop {
         for (TypeBike type : TypeBike.values()) {
             System.out.println(type + " " + bikeSales.get(type));
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Shop";
     }
 }
