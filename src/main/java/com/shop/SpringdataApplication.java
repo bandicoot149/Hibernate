@@ -15,21 +15,15 @@ public class SpringdataApplication {
 
 
     public static void main(String[] args) {
-        ShopGenerator shopGenerator = new ShopGenerator();
-        Shop shop = shopGenerator.generate(30,5,5,2);
-        Dao.writeInDbAll(shop.getComponents());
-        Dao.writeInDbAll(shop.getBikes());
-        Dao.writeInDbAll(shop.getAccessories());
-        Dao.writeInDbAll(shop.getPromotions());
-        Dao.writeInDbAll(Set.of(CustomerGenerator.generate(), CustomerGenerator.generate(), CustomerGenerator.generate(), CustomerGenerator.generate(), CustomerGenerator.generate()));
-        Set<Customer> customers = CustomerDao.findAll();
+        List<Customer> customers = CustomerDao.findAll();
+        List<Bike> bikes = BikeDao.findAll();
         for (Customer customer : customers) {
-            customer.chooseBike(shop.getBikes());
+            customer.chooseBike(bikes);
         }
         for (Customer customer : customers) {
             customer.buySelectedGoods();
         }
-        List<Bike> bikes = BikeDao.findByStatus(GoodStatus.SOLD_OUT);
+        List<Bike> soldBikes = BikeDao.findByStatus(GoodStatus.SOLD_OUT);
     }
 
 }

@@ -19,4 +19,13 @@ public class BikeDao {
         session.close();
         return goods;
     }
+
+    public static List<Bike> findAll() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx1 = session.beginTransaction();
+        List <Bike> goods = session.createQuery("from Bike", Bike.class).list();
+        tx1.commit();
+        session.close();
+        return goods;
+    }
 }

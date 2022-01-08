@@ -16,7 +16,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 @Data
@@ -61,7 +60,7 @@ public class Customer {
                 '}';
     }
 
-    public void chooseBike(Set<Bike> bikes) {
+    public void chooseBike(List<Bike> bikes) {
         for (Bike bike : bikes) {
             if ((bike.getTypeBike() == this.neededTypeBike) && (bike.getFrameSize() > this.neededMinFrameSizeBike) && (bike.getFrameSize() < this.neededMaxFrameSizeBike)) {
                 if (this.balance >= bike.getPrice()) {
@@ -71,7 +70,7 @@ public class Customer {
         }
     }
 
-    public void chooseAccessories(Set<Accessory> accessories) {
+    public void chooseAccessories(List<Accessory> accessories) {
         for (Accessory accessory : accessories) {
             if ((accessory.getTypeAccessory() == neededAccessory)) {
                 addGoodToShoppingCart(accessory);
@@ -79,7 +78,7 @@ public class Customer {
         }
     }
 
-    public void chooseComponents(Set<Component> components) {
+    public void chooseComponents(List<Component> components) {
         for (Component component : components) {
             if ((component.getTypeComponent() == neededComponent)) {
                 addGoodToShoppingCart(component);

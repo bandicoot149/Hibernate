@@ -20,17 +20,16 @@ public class CustomerDao {
         session.close();
     }
 
-    public static Set<Customer> findAll() {
+    public static List<Customer> findAll() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx1 = session.beginTransaction();
-        List<Customer> customerList = session.createQuery("From Customer").list();
-        for (Customer customer : customerList) {
+        List<Customer> customers = session.createQuery("From Customer").list();
+        for (Customer customer : customers) {
             customer.setPurchasedGoods(new ArrayList<>());
             customer.setShoppingCart(new ArrayList<>());
         }
-        Set<Customer> customerSet = new HashSet<Customer>(customerList);
         tx1.commit();
         session.close();
-        return customerSet;
+        return customers;
     }
 }

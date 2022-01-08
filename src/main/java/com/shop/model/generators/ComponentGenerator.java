@@ -8,7 +8,7 @@ import java.util.Random;
 public class ComponentGenerator {
 
 
-    public Component generate() {
+    public static Component generate() {
         Random random = new Random();
         Component component = new Component(random.nextInt(100) + 15);
         component.setTypeComponent(TypeComponent.values()[random.nextInt(TypeComponent.values().length)]);

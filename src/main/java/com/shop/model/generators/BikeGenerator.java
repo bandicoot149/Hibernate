@@ -9,7 +9,7 @@ import java.util.Random;
 public class BikeGenerator {
 
 
-    public Bike generate() {
+    public static Bike generate() {
         Random random = new Random();
         Bike bike = new Bike(0);
         bike.setBrand(Brand.values()[random.nextInt(Brand.values().length)]);

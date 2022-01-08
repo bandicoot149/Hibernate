@@ -9,7 +9,7 @@ import java.util.Random;
 public class PromotionGenerator {
 
 
-    public Promotion generate() {
+    public static Promotion generate() {
         Random random = new Random();
         Promotion promotion = new Promotion();
         promotion.setBrand(Brand.values()[random.nextInt(Brand.values().length)]);
