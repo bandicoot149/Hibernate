@@ -1,5 +1,7 @@
 package com.shop.model;
 
+import com.shop.dao.CustomerDao;
+import com.shop.dao.Dao;
 import com.shop.model.good.Good;
 import com.shop.model.good.GoodStatus;
 import com.shop.model.good.accessory.Accessory;
@@ -14,6 +16,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Data
@@ -26,9 +29,9 @@ public class Customer {
     private UUID id;
     public String name;
     private double balance;
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true, fetch= FetchType.EAGER)
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch= FetchType.LAZY)
     private List<Good> shoppingCart = new ArrayList<>();
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true, fetch= FetchType.EAGER)
+    @Transient
     private List<Good> purchasedGoods = new ArrayList<>();
     private TypeBike neededTypeBike;
     private int neededMinFrameSizeBike;
@@ -58,7 +61,7 @@ public class Customer {
                 '}';
     }
 
-    public void chooseBike(List<Bike> bikes) {
+    public void chooseBike(Set<Bike> bikes) {
         for (Bike bike : bikes) {
             if ((bike.getTypeBike() == this.neededTypeBike) && (bike.getFrameSize() > this.neededMinFrameSizeBike) && (bike.getFrameSize() < this.neededMaxFrameSizeBike)) {
                 if (this.balance >= bike.getPrice()) {
@@ -68,7 +71,7 @@ public class Customer {
         }
     }
 
-    public void chooseAccessories(List<Accessory> accessories) {
+    public void chooseAccessories(Set<Accessory> accessories) {
         for (Accessory accessory : accessories) {
             if ((accessory.getTypeAccessory() == neededAccessory)) {
                 addGoodToShoppingCart(accessory);
@@ -76,7 +79,7 @@ public class Customer {
         }
     }
 
-    public void chooseComponents(List<Component> components) {
+    public void chooseComponents(Set<Component> components) {
         for (Component component : components) {
             if ((component.getTypeComponent() == neededComponent)) {
                 addGoodToShoppingCart(component);
@@ -91,10 +94,12 @@ public class Customer {
     public void buySelectedGoods() {
         for (Good good : shoppingCart) {
             if (balance > good.getPrice() && good.getStatus() == GoodStatus.IN_STOCK && good.getClass() == Bike.class) {
+                good.setCustomer(this);
                 purchasedGoods.add(good);
                 good.setStatus(GoodStatus.SOLD_OUT);
                 balance -= good.getPrice();
-                System.out.println(name + " купил велосипед " + ((Bike) good).getBrand());
+                name = "Buyer";
+                CustomerDao.update(this);
                 break; // покупаем велосипед только один раз
             }
         }

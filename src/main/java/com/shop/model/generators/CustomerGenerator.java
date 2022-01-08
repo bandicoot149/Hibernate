@@ -10,7 +10,7 @@ import java.util.Random;
 public class CustomerGenerator {
 
 
-    public Customer generate() {
+    public static Customer generate() {
         Random random = new Random();
         Customer customer = new Customer();
         customer.setBalance(random.nextInt(200) + 100);

@@ -13,29 +13,16 @@ import java.util.*;
 
 @Data
 @NoArgsConstructor
-@Entity
-@Table
 public class Shop {
 
-    @Id
-    private UUID id;
 
     private double balance = 0;
-    @OneToMany
-    @JoinColumn(name = "shop_id")
     private Set<Promotion> promotions;
-    @OneToMany
-    @JoinColumn(name = "shop_id")
     private Set<Bike> bikes;
-    @OneToMany
-    @JoinColumn(name = "shop_id")
     private Set<Accessory> accessories;
-    @OneToMany
-    @JoinColumn(name = "shop_id")
     private Set<Component> components;
 
     public Shop(double balance, Set<Promotion> promotions, Set<Bike> bikes, Set<Accessory> accessories, Set<Component> components) {
-        this.id = UUID.randomUUID();
         this.balance = balance;
         this.promotions = promotions;
         this.bikes = bikes;

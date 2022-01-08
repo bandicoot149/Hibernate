@@ -24,11 +24,6 @@ public abstract class Good {
     @ManyToOne(fetch = FetchType.EAGER, cascade = {
             CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,
             CascadeType.REFRESH})
-    @JoinColumn(name = "shop_id")
-    private Shop shop;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {
-            CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,
-            CascadeType.REFRESH})
     @JoinColumn(name = "customer_id")
     private Customer customer;
 

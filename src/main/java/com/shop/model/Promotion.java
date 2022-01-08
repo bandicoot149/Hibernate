@@ -19,9 +19,6 @@ public class Promotion {
     private Brand brand;
     private TypeBike typeBike;
     private int percent;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "shop_id")
-    private Shop shop;
 
     public Promotion () {
         this.id = UUID.randomUUID();
