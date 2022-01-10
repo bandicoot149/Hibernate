@@ -7,7 +7,6 @@ import java.util.Random;
 
 
 public class AccessoryGenerator {
-
     public static Accessory generate() {
         Random random = new Random();
         Accessory accessory = new Accessory(random.nextInt(50) + 10);

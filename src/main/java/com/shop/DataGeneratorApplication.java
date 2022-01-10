@@ -14,25 +14,23 @@ import java.util.Set;
 
 public class DataGeneratorApplication {
     public static void main(String[] args) {
-        int bikesCount = 40;
-        int accessoryCount = 5;
-        int componentsCount = 5;
+        int bikesCount = 60;
+        int accessoryCount = 20;
+        int componentsCount = 20;
         int promotionCount = 2;
-        int customerCount = 5;
+        int customerCount = 10;
 
         Set<Bike> bikes = new HashSet<>();
-        Set<Accessory> accessories = new HashSet<>();
-        Set<Component> components = new HashSet<>();
         Set<Promotion> promotions = new HashSet<>();
         Set<Customer> customers = new HashSet<>();
         for (int i = 0; i < bikesCount; i++) {
             bikes.add(BikeGenerator.generate());
         }
         for (int i = 0; i < accessoryCount; i++) {
-            accessories.add(AccessoryGenerator.generate());
+            Dao.writeInDb(AccessoryGenerator.generate());
         }
         for (int i = 0; i < componentsCount; i++) {
-            components.add(ComponentGenerator.generate());
+            Dao.writeInDb(ComponentGenerator.generate());
         }
         for (int i = 0; i < promotionCount; i++) {
             promotions.add(PromotionGenerator.generate());
@@ -40,12 +38,8 @@ public class DataGeneratorApplication {
         for (int i = 0; i < customerCount; i++) {
             customers.add(CustomerGenerator.generate());
         }
-
         Dao.writeInDbAll(bikes);
-        Dao.writeInDbAll(accessories);
-        Dao.writeInDbAll(components);
         Dao.writeInDbAll(customers);
         Dao.writeInDbAll(promotions);
-
     }
 }

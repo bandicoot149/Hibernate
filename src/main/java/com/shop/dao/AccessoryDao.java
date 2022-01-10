@@ -10,28 +10,12 @@ import java.util.List;
 import java.util.Set;
 
 public class AccessoryDao {
-    public void writeInDB(Set<Accessory> goods) {
+    public static List<Accessory> findAll() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx1 = session.beginTransaction();
-        goods.forEach(session::save);
+        List <Accessory> goods = session.createQuery("from Accessory", Accessory.class).list();
         tx1.commit();
         session.close();
-    }
-
-    public List<Accessory> readFromDB() {
-        Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-            List <Accessory> goods = session.createQuery("from Accessory", Accessory.class).list();
-            session.close();
-            HibernateUtil.getSessionFactory().close();
-            return goods;
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
-        return null;
+        return goods;
     }
 }

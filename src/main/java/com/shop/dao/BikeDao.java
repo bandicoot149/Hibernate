@@ -8,7 +8,9 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
+import java.util.UUID;
 
 public class BikeDao {
     public static List<Bike> findByStatus(GoodStatus status) {
@@ -24,6 +26,15 @@ public class BikeDao {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx1 = session.beginTransaction();
         List <Bike> goods = session.createQuery("from Bike", Bike.class).list();
+        tx1.commit();
+        session.close();
+        return goods;
+    }
+
+    public static List<Bike> findAllSold() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx1 = session.beginTransaction();
+        List<Bike> goods = session.createQuery("from Bike where status=" + GoodStatus.SOLD_OUT.ordinal(), Bike.class).list();
         tx1.commit();
         session.close();
         return goods;

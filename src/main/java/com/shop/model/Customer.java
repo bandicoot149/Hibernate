@@ -1,7 +1,8 @@
 package com.shop.model;
 
+import com.shop.dao.AccessoryDao;
+import com.shop.dao.BikeDao;
 import com.shop.dao.CustomerDao;
-import com.shop.dao.Dao;
 import com.shop.model.good.Good;
 import com.shop.model.good.GoodStatus;
 import com.shop.model.good.accessory.Accessory;
@@ -14,9 +15,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Data
 @NoArgsConstructor
@@ -28,9 +27,9 @@ public class Customer {
     private UUID id;
     public String name;
     private double balance;
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch= FetchType.LAZY)
-    private List<Good> shoppingCart = new ArrayList<>();
     @Transient
+    private List<Good> shoppingCart = new ArrayList<>();
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch= FetchType.EAGER)
     private List<Good> purchasedGoods = new ArrayList<>();
     private TypeBike neededTypeBike;
     private int neededMinFrameSizeBike;
@@ -38,26 +37,9 @@ public class Customer {
     private TypeAccessory neededAccessory;
     private TypeComponent neededComponent;
 
-    public Customer(String name, double balance) {
-
-        this.name = name;
-        this.balance = balance;
-    }
-
     @Override
     public String toString() {
-        return "Customer{" +
-                "name=" + name +
-                ", balance='" + balance + '\'' +
-                /*", neededTypeBike='" + neededTypeBike + '\'' +
-                ", neededMinFrameSizeBike='" + neededMinFrameSizeBike + '\'' +
-                ", neededMaxFrameSizeBike='" + neededMaxFrameSizeBike + '\'' +
-                ", neededAccessory='" + neededAccessory + '\'' +
-                ", neededComponent='" + neededComponent + '\'' +
-                ", shoppingCart='" + shoppingCart.size() + '\'' + // TODO: продумать вывод корзины и покупок?
-                ", purchasedGoods='" + purchasedGoods.size() + '\'' +*/
-
-                '}';
+        return "Customer";
     }
 
     public void chooseBike(List<Bike> bikes) {
@@ -97,8 +79,6 @@ public class Customer {
                 purchasedGoods.add(good);
                 good.setStatus(GoodStatus.SOLD_OUT);
                 balance -= good.getPrice();
-                name = "Buyer";
-                CustomerDao.update(this);
                 break; // покупаем велосипед только один раз
             }
         }
@@ -106,23 +86,35 @@ public class Customer {
         if (!purchasedGoods.isEmpty()) { /* Если покупатель не купил велосипед, то ему не нужны комплектующие и аксессуары*/
             for (Good good : shoppingCart) {
                 if (balance > good.getPrice() && good.getStatus() == GoodStatus.IN_STOCK && good.getClass() == Component.class) {
+                    good.setCustomer(this);
                     purchasedGoods.add(good);
                     good.setStatus(GoodStatus.SOLD_OUT);
                     balance -= good.getPrice();
-                    System.out.println(name + " купил компонент " + ((Component) good).getTypeComponent());
                     break;
                 }
             }
 
             for (Good good : shoppingCart) {
                 if (balance > good.getPrice() && good.getStatus() == GoodStatus.IN_STOCK && good.getClass() == Accessory.class) {
+                    good.setCustomer(this);
                     purchasedGoods.add(good);
                     good.setStatus(GoodStatus.SOLD_OUT);
                     balance -= good.getPrice();
-                    System.out.println(name + " купил аксессуар " + ((Accessory) good).getTypeAccessory());
                     break;
                 }
             }
+            CustomerDao.update(this);
         }
+    }
+
+    public double getAmountOfPurchase() {
+        Double amount = 0.0;
+        List<Bike> bikes = BikeDao.findAllSold();
+        for (Good good : bikes) {
+            if (good.getCustomer().getId() == this.getId()) {
+                amount += good.getPrice();
+            }
+        }
+        return amount;
     }
 }

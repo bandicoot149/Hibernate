@@ -15,6 +15,15 @@ public class Dao {
         tx1.commit();
         session.close();
     }
+
+    public static <T> void writeInDb(T obj) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx1 = session.beginTransaction();
+        session.persist(obj);
+        tx1.commit();
+        session.close();
+    }
+
     public static <T> void delete(T obj) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx1 = session.beginTransaction();

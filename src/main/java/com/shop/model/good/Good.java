@@ -21,7 +21,7 @@ public abstract class Good {
     private UUID id;
     private double price;
     private GoodStatus status = GoodStatus.IN_STOCK;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {
+    @ManyToOne(cascade = {
             CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,
             CascadeType.REFRESH})
     @JoinColumn(name = "customer_id")

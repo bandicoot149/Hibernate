@@ -11,28 +11,12 @@ import java.util.List;
 import java.util.Set;
 
 public class ComponentDao {
-    public void writeInDB(Set<Component> goods) {
+    public static List<Component> findAll() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx1 = session.beginTransaction();
-        goods.forEach(session::save);
+        List <Component> goods = session.createQuery("from Component", Component.class).list();
         tx1.commit();
         session.close();
-    }
-
-    public List<Component> readFromDB() {
-        Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-            List <Component> goods = session.createQuery("from Component", Component.class).list();
-            session.close();
-            HibernateUtil.getSessionFactory().close();
-            return goods;
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
-        return null;
+        return goods;
     }
 }
