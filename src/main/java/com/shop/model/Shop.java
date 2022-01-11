@@ -45,6 +45,16 @@ public class Shop {
         return soldGood;
     }
 
+    public HashMap<Customer, Double> getTopBuyersList (List<Good> soldGood) {
+        HashMap<Customer, Double> buyersList = new HashMap<Customer, Double>();
+        for (Good good : soldGood) {
+            if (!buyersList.containsKey(good.getCustomer())) {
+                buyersList.put(good.getCustomer(), good.getCustomer().getSumPurchase());
+            }
+        }
+        return buyersList;
+    }
+
     public void makeStatistics () {
 
     }

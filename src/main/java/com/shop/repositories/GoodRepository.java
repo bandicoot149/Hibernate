@@ -1,6 +1,7 @@
 package com.shop.repositories;
 
 import com.shop.model.good.Good;
+import com.shop.model.good.GoodStatus;
 import com.shop.model.good.accessory.Accessory;
 import com.shop.model.good.bike.Bike;
 import com.shop.model.good.component.Component;
@@ -17,4 +18,6 @@ public interface GoodRepository extends JpaRepository<Good, UUID> {
     public List<Component> findAllComponents();
     @Query("from Accessory")
     public List<Accessory> findAllAccessories();
+
+    public List<Good>findAllByStatus(GoodStatus status);
 }

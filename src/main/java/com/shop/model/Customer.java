@@ -107,14 +107,14 @@ public class Customer {
         return currentPurchased;
     }
 
-    /*public double getAmountOfPurchase() {
-        Double amount = 0.0;
-        List<Bike> bikes = BikeDao.findAllSold();
-        for (Good good : bikes) {
-            if (good.getCustomer().getId() == this.getId()) {
-                amount += good.getPrice();
-            }
+    public Double getSumPurchase() {
+        if (purchased.isEmpty()) {
+            return 0.0;
+        } else {
+            return  purchased.stream()
+                    .map(g -> g.getPrice())
+                    .reduce(Double::sum)
+                    .get();
         }
-        return amount;
-    }*/
+    }
 }
