@@ -15,11 +15,11 @@ public class CustomerGenerator {
         Random random = new Random();
         Customer customer = new Customer();
         customer.setBalance(random.nextInt(240) + 200);
-        customer.setNeededTypeBike(TypeBike.values()[random.nextInt(TypeBike.values().length)]);
-        customer.setNeededMinFrameSizeBike(random.nextInt(15) + 8);
-        customer.setNeededMaxFrameSizeBike(customer.getNeededMinFrameSizeBike() + 5);
-        customer.setNeededAccessory(TypeAccessory.values()[random.nextInt(TypeAccessory.values().length)]);
-        customer.setNeededComponent(TypeComponent.values()[random.nextInt(TypeComponent.values().length)]);
+        customer.setType(TypeBike.values()[random.nextInt(TypeBike.values().length)]);
+        customer.setMin(random.nextInt(15) + 8);
+        customer.setMax(customer.getMin() + 5);
+        customer.setAccessory(TypeAccessory.values()[random.nextInt(TypeAccessory.values().length)]);
+        customer.setComponent(TypeComponent.values()[random.nextInt(TypeComponent.values().length)]);
         customer.setName(CustomerName.values()[random.nextInt(CustomerName.values().length)].name);
         return customer;
     }

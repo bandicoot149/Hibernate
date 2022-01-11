@@ -1,32 +1,47 @@
 package com.shop;
 
-import com.shop.dao.*;
 import com.shop.model.Customer;
+import com.shop.model.Shop;
+import com.shop.model.generators.AccessoryGenerator;
+import com.shop.model.generators.CustomerGenerator;
+import com.shop.model.good.Good;
 import com.shop.model.good.accessory.Accessory;
 import com.shop.model.good.bike.Bike;
-import com.shop.model.good.component.Component;
+import com.shop.repositories.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
-public class SpringdataApplication {
+@SpringBootApplication
+public class SpringdataApplication  implements CommandLineRunner {
 
 
     public static void main(String[] args) {
-        List<Customer> customers = CustomerDao.findAll();
-        List<Bike> bikes = BikeDao.findAll();
-        List<Accessory> accessories = AccessoryDao.findAll();
-        List<Component> components = ComponentDao.findAll();
-        for (Customer customer : customers) {
-            customer.chooseBike(bikes);
-            customer.chooseAccessories(accessories);
-            customer.chooseComponents(components);
-        }
-        for (Customer customer : customers) {
-            customer.buySelectedGoods();
-        }
-        for (Customer customer : customers) {
-            customer.getAmountOfPurchase();
-        }
+        SpringApplication.run(SpringdataApplication.class, args);
     }
+
+    @Autowired
+    private CustomerRepository customerRepository;
+    @Autowired
+    private PromotionRepository promotionRepository;
+    @Autowired
+    private GoodRepository goodRepository;
+
+    @Override
+    public void run(String... args) throws Exception {
+        Shop shop = new Shop(100, promotionRepository.findAll(),
+                goodRepository.findAllBikes(),
+                goodRepository.findAllAccessories(),
+                goodRepository.findAllComponents());
+        List<Good> soldGood = shop.simulateWork(customerRepository.findAll());
+        goodRepository.saveAll(soldGood);
+    }
+
+
 
 }

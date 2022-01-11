@@ -1,60 +1,52 @@
 package com.shop.model;
 
+import com.shop.model.good.Good;
 import com.shop.model.good.GoodStatus;
 import com.shop.model.good.accessory.Accessory;
 import com.shop.model.good.bike.Bike;
 import com.shop.model.good.bike.TypeBike;
 import com.shop.model.good.component.Component;
+import com.shop.repositories.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import javax.persistence.*;
 import java.util.*;
 
 @Data
 @NoArgsConstructor
 public class Shop {
 
-
     private double balance = 0;
-    private Set<Promotion> promotions;
-    private Set<Bike> bikes;
-    private Set<Accessory> accessories;
-    private Set<Component> components;
+    private List<Promotion> promotions;
+    private List<Bike> bikes;
+    private List<Accessory> accessories;
+    private List<Component> components;
 
-    public Shop(double balance, Set<Promotion> promotions, Set<Bike> bikes, Set<Accessory> accessories, Set<Component> components) {
+    public Shop(double balance, List<Promotion> promotions, List<Bike> bikes, List<Accessory> accessories, List<Component> components) {
         this.balance = balance;
         this.promotions = promotions;
         this.bikes = bikes;
         this.accessories = accessories;
         this.components = components;
-        activatePromotions();
     }
 
-    /* Допущение - магазин единажды применяет этот метод */
-    private void activatePromotions() {
-        for (Bike bike : bikes) {
-            for (Promotion promotion : promotions) {
-                if(promotion.checkCompliance(bike)) {
-                    bike.setPrice(bike.getPrice()*promotion.getPercent()/100);
-                }
-            }
+    public List<Good> simulateWork(List<Customer> customers) {
+        List<Good> soldGood = new ArrayList<>();
+        for (Customer customer : customers) {
+            customer.chooseBike(bikes);
+            customer.chooseComponents(components);
+            customer.chooseAccessories(accessories);
         }
+        for (Customer customer : customers) {
+            soldGood.addAll(customer.buySelectedGoods(promotions));
+        }
+        return soldGood;
     }
 
     public void makeStatistics () {
-        Map<TypeBike, Integer> bikeSales = new HashMap<TypeBike, Integer>();
-        for (TypeBike type : TypeBike.values()) {
-            bikeSales.put(type, 0);
-        }
-        for (Bike bike : bikes) {
-            if (bike.getStatus() == GoodStatus.SOLD_OUT) {
-                bikeSales.put(bike.getTypeBike(), bikeSales.get(bike.getTypeBike()) + 1);
-            }
-        }
-        for (TypeBike type : TypeBike.values()) {
-            System.out.println(type + " " + bikeSales.get(type));
-        }
+
     }
 
     @Override

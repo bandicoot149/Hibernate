@@ -11,10 +11,10 @@ public class PromotionGenerator {
 
     public static Promotion generate() {
         Random random = new Random();
-        Promotion promotion = new Promotion();
-        promotion.setBrand(Brand.values()[random.nextInt(Brand.values().length)]);
-        promotion.setTypeBike(TypeBike.values()[random.nextInt(TypeBike.values().length)]);
-        promotion.setPercent(random.nextInt(25) + 5);
-        return promotion;
+        return Promotion.builder()
+                .brand(Brand.values()[random.nextInt(Brand.values().length)])
+                .type(TypeBike.values()[random.nextInt(TypeBike.values().length)])
+                .percent(random.nextInt(25) + 5)
+                .build();
     }
 }

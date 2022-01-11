@@ -13,7 +13,7 @@ import javax.persistence.Entity;
 @DiscriminatorValue("Accessory")
 public class Accessory extends Good {
 
-    private TypeAccessory typeAccessory;
+    private TypeAccessory atype;
 
     public Accessory (double price) {
         super(price);
@@ -22,6 +22,6 @@ public class Accessory extends Good {
 
     @Override
     public String toString() {
-        return "Accessory{" + "typeAccessory=" + typeAccessory + '}';
+        return "Accessory{" + "typeAccessory=" + atype + '}';
     }
 }

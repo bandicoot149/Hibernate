@@ -11,7 +11,7 @@ public class ComponentGenerator {
     public static Component generate() {
         Random random = new Random();
         Component component = new Component(random.nextInt(100) + 15);
-        component.setTypeComponent(TypeComponent.values()[random.nextInt(TypeComponent.values().length)]);
+        component.setCtype(TypeComponent.values()[random.nextInt(TypeComponent.values().length)]);
         return component;
     }
 }

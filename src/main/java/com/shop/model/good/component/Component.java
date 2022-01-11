@@ -13,7 +13,7 @@ import javax.persistence.Entity;
 @DiscriminatorValue("Component")
 public class Component extends Good {
 
-    private TypeComponent typeComponent;
+    private TypeComponent ctype;
 
 
     public Component (double price) {
@@ -22,6 +22,6 @@ public class Component extends Good {
 
     @Override
     public String toString() {
-        return "Component{" + "typeComponent=" + typeComponent + '}';
+        return "Component{" + "typeComponent=" + ctype + '}';
     }
 }

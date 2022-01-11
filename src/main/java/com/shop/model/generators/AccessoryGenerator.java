@@ -10,7 +10,7 @@ public class AccessoryGenerator {
     public static Accessory generate() {
         Random random = new Random();
         Accessory accessory = new Accessory(random.nextInt(50) + 10);
-        accessory.setTypeAccessory(TypeAccessory.values()[random.nextInt(TypeAccessory.values().length)]);
+        accessory.setAtype(TypeAccessory.values()[random.nextInt(TypeAccessory.values().length)]);
         return accessory;
     }
 }
