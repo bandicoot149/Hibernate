@@ -4,9 +4,6 @@ import com.shop.model.Customer;
 import com.shop.model.Promotion;
 import com.shop.model.generators.*;
 import com.shop.model.good.Good;
-import com.shop.model.good.accessory.Accessory;
-import com.shop.model.good.bike.Bike;
-import com.shop.model.good.component.Component;
 import com.shop.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -33,11 +30,11 @@ public class DataGeneratorApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        int bikesCount = 60;
+        int bikesCount = 160;
         int accessoryCount = 20;
         int componentsCount = 20;
         int promotionCount = 2;
-        int customerCount = 10;
+        int customerCount = 40;
 
         List<Good> goods = new ArrayList<>();
         List<Promotion> promotions = new ArrayList<>();
@@ -63,9 +60,5 @@ public class DataGeneratorApplication implements CommandLineRunner {
         goodRepository.saveAll(goods);
         promotionRepository.saveAll(promotions);
         customerRepository.saveAll(customers);
-
-        /*Dao.writeInDbAll(bikes);
-        Dao.writeInDbAll(customers);
-        Dao.writeInDbAll(promotions);*/
     }
 }
