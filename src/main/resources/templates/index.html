@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная</title>
+    <link th:href="@{/styles/main.css}" href="../static/styles/main.css" rel="stylesheet">
+</head>
+<body>
+<h1>Bike Shop</h1>
+<h2>Добавить нового сотрудника</h2>
+<form method="get" th:action="@{'/goods'}">
+    <button type="submit">Товары</button>
+</form>
+<form method="get" th:action="@{'/promotions'}">
+    <button type="submit">Акции</button>
+</form>
+<form method="get" th:action="@{'/customers'}">
+    <button type="submit">Покупатели</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список товаров</title>
+    <link th:href="@{/styles/main.css}" href="../static/styles/main.css" rel="stylesheet">
+</head>
+<body>
+<h1>Bike Shop</h1>
+<h2>Список товаров</h2>
+<ol class="good_list">
+    <li th:each="g : ${goods}">
+        <a th:href="'good/' + ${g.getId()}" th:text="${g.getPrice}">1000</a>
+    </li>
+</ol>
+</body>
+</html>
