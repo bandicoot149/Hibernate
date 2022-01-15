@@ -1,29 +1,28 @@
 package com.shop.model;
 
+import com.shop.model.customer.Customer;
 import com.shop.model.good.Good;
-import com.shop.model.good.GoodStatus;
 import com.shop.model.good.accessory.Accessory;
 import com.shop.model.good.bike.Bike;
 import com.shop.model.good.bike.Brand;
-import com.shop.model.good.bike.TypeBike;
 import com.shop.model.good.component.Component;
-import com.shop.repositories.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import lombok.experimental.SuperBuilder;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Data
+@SuperBuilder
 @NoArgsConstructor
 public class Shop {
 
     private double balance = 0;
-    private List<Promotion> promotions;
-    private List<Bike> bikes;
-    private List<Accessory> accessories;
-    private List<Component> components;
+    private List<Promotion> promotions = new ArrayList<>();
+    private List<Bike> bikes = new ArrayList<>();
+    private List<Accessory> accessories = new ArrayList<>();
+    private List<Component> components = new ArrayList<>();
 
     public Shop(double balance, List<Promotion> promotions, List<Bike> bikes, List<Accessory> accessories, List<Component> components) {
         this.balance = balance;
@@ -53,7 +52,16 @@ public class Shop {
                 buyersList.put(good.getCustomer(), good.getCustomer().getSumPurchase());
             }
         }
-        return buyersList;
+
+        return buyersList.entrySet()
+                .stream()
+                .sorted((i1, i2)
+                        -> i2.getValue().compareTo(
+                        i1.getValue()))
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue,
+                        (z1, z2) -> z1, LinkedHashMap::new));
     }
 
     public void makeStatistics () {

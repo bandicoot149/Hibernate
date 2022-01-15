@@ -1,6 +1,6 @@
 package com.shop.model.generators;
 
-import com.shop.model.Customer;
+import com.shop.model.customer.Customer;
 import com.shop.model.customer.CustomerName;
 import com.shop.model.good.accessory.TypeAccessory;
 import com.shop.model.good.bike.TypeBike;

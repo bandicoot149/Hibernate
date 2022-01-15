@@ -8,7 +8,7 @@ public enum CustomerName {
     YAROSLAV("Ярослав"),
     YURI("Юрий"),
     ROMAN("Роман"),
-    ALEXEY("Алесей");
+    ALEXEY("Алексей");
     public final String name;
 
     private CustomerName(String name) {

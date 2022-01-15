@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список товаров</title>
+    <link th:href="@{/styles/main.css}" href="../static/styles/main.css" rel="stylesheet">
+</head>
+<body>
+<header>
+    <h1><a th:href="@{'/'}" class="mainLink">Bike Shop</a></h1>
+</header>
+<hr class="hr-horizontal-gradient">
+<main>
+    <h2>Акции!</h2>
+    <ul th:each="p : ${promotions}">
+        <li th:text="@{'При покупке велосипеда бренда ' + ${p.getBrand} + ' с типом - ' + ${p.getType().getValue()} + '. Скидка - ' + ${p.getPercent} + '%.'}"></li>
+    </ul>
+    <img th:src="@{/img/promotion.png}" alt="акция"/>
+</main>
+<footer>
+    <hr class="hr-horizontal-gradient">
+    <h2>Контакты</h2>
+</footer>
+</body>
+</html>

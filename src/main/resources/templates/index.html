@@ -6,16 +6,43 @@
     <link th:href="@{/styles/main.css}" href="../static/styles/main.css" rel="stylesheet">
 </head>
 <body>
-<h1>Bike Shop</h1>
-<h2>Добавить нового сотрудника</h2>
-<form method="get" th:action="@{'/goods'}">
-    <button type="submit">Товары</button>
-</form>
-<form method="get" th:action="@{'/promotions'}">
-    <button type="submit">Акции</button>
-</form>
-<form method="get" th:action="@{'/customers'}">
-    <button type="submit">Покупатели</button>
-</form>
+<header>
+    <h1><a th:href="@{'/'}" class="mainLink">Bike Shop</a></h1>
+</header>
+<hr class="hr-horizontal-gradient">
+<main>
+    <form method="get" th:action="@{'/bikes'}" class="effect-1">
+        <button type="submit">Велосипеды</button>
+    </form>
+    <form method="get" th:action="@{'/components'}">
+        <button type="submit">Комплектующие</button>
+    </form>
+    <form method="get" th:action="@{'/accessories'}">
+        <button type="submit">Акссесуары</button>
+    </form>
+    <form method="get" th:action="@{'/promotions'}">
+        <button type="submit">Акции</button>
+    </form>
+    <form method="get" th:action="@{'/customers'}">
+        <button type="submit">Посетители</button>
+    </form>
+    <form method="get" th:action="@{'/work'}">
+        <button type="submit">Сделать покупки!</button>
+    </form>
+    <form method="get" th:action="@{'/statistic'}">
+        <button type="submit">Статистика</button>
+    </form>
+    <form method="get" th:action="@{'/dataGen'}">
+        <button type="submit">Заполнить базу данных</button>
+    </form>
+    <form method="get" th:action="@{'/clear'}">
+        <button type="submit">Очистить все данные</button>
+    </form>
+    <img th:src="@{/img/crocodile.png}" alt="крокодил" />
+</main>
+<footer>
+    <hr class="hr-horizontal-gradient">
+    <h2>Контакты</h2>
+</footer>
 </body>
 </html>

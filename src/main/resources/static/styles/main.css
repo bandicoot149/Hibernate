@@ -1,0 +1,108 @@
+body {
+    background-color: #F1E9DA;
+    text-align: center;
+    font-family: 'Droid Serif', serif;
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    max-width: 260px;
+    max-height: 500px;
+    position: absolute;
+    right: 10px;
+    top: 100px;
+}
+
+button {
+    background-color: #104547;
+    color: #fff;
+    font-size: large;
+    margin: 10px auto 0px auto;
+    padding: 16px;
+    width: 200px;
+    border-radius: 10px;
+}
+
+button:hover {
+    color: #F1E9DA;
+}
+
+table {
+    font-size: large;
+    margin: auto;
+    border-collapse: collapse;
+    text-align: center;
+    color: #fff;
+}
+
+td {
+    border-style: solid;
+    border-width: 0 3px 3px 0;
+    border-color: #F1E9DA;
+    padding: 10px 20px;
+    background: #104547;
+}
+
+th:first-child, td:first-child {
+    text-align: left;
+}
+
+.tableLink {
+    text-decoration: none;
+    color: #fff;
+}
+
+.tableLink:hover {
+    color: #F1E9DA;
+
+}
+
+.mainLink {
+    text-decoration: none;
+    color: #000;
+}
+
+.mainLink:hover {
+    color: #334;
+}
+
+.hr-horizontal-gradient {
+    margin: 20px 0;
+    padding: 0;
+    height: 6px;
+    border: none;
+    background: linear-gradient(45deg, #333, #ddd);
+}
+
+li {
+    font-size: large;
+    list-style-type: none;
+}
+
+main {
+    min-height: 720px;
+}
+
+footer {
+
+}
+
+.number-input {
+    width: 25px;
+    padding: 5px;
+    float: right;
+
+}
+
+#gen-param {
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+}
+
+.gen-line {
+    display: inline-block;
+    margin-bottom: 5px;
+    width: 290px;
+}
