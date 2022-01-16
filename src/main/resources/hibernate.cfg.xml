@@ -28,7 +28,7 @@
         <mapping class="com.shop.model.good.bike.Bike" />
         <mapping class="com.shop.model.good.component.Component" />
         <mapping class="com.shop.model.good.Good" />
-        <mapping class="com.shop.model.Customer" />
+        <mapping class="com.shop.model.customer.Customer" />
         <mapping class="com.shop.model.Promotion" />
     </session-factory>
 </hibernate-configuration>

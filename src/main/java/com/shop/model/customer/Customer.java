@@ -1,5 +1,6 @@
-package com.shop.model;
+package com.shop.model.customer;
 
+import com.shop.model.Promotion;
 import com.shop.model.good.Good;
 import com.shop.model.good.GoodStatus;
 import com.shop.model.good.accessory.Accessory;

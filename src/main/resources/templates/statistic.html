@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список товаров</title>
+    <link th:href="@{/styles/main.css}" href="../static/styles/main.css" rel="stylesheet">
+</head>
+<body>
+<header>
+    <h1><a th:href="@{'/'}" class="mainLink">Bike Shop</a></h1>
+</header>
+<hr class="hr-horizontal-gradient">
+<main>
+    <h2>Покупатели</h2>
+    <table>
+        <tr>
+            <td>Покупатель</td>
+            <td>Сумма покупок</td>
+            <td>Баланс</td>
+        </tr>
+        <tr th:each="c : ${customers.entrySet()}">
+            <td><a th:href="@{'/customer/' + ${c.getKey().getId()}}" th:text="${c.getKey().getName()}" class="tableLink">Имя</a></td>
+            <td th:text="${c.getValue()}">Сумма покупок</td>
+            <td th:text="${c.getKey().getBalance}">Баланс</td>
+
+        </tr>
+    </table>
+    <h3 th:text="@{'Общая сумма покупок -  ' + ${sum}}"></h3>
+    <img th:src="@{/img/customer.png}" alt="покупатель" />
+</main>
+<footer>
+    <hr class="hr-horizontal-gradient">
+    <h2>Контакты</h2>
+</footer>
+</body>
+</html>

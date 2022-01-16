@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список товаров</title>
+    <link th:href="@{/styles/main.css}" href="../static/styles/main.css" rel="stylesheet">
+</head>
+<body>
+<header>
+    <h1><a th:href="@{'/'}" class="mainLink">Bike Shop</a></h1>
+</header>
+<hr class="hr-horizontal-gradient">
+<main>
+    <h2>Аксессуары</h2>
+    <table>
+        <tr>
+            <td>Тип товара</td>
+            <td>Cтоимость</td>
+            <td>Наличие</td>
+            <td>Покупатель</td>
+        </tr>
+        <tr th:each="isa : ${inStockAccessories}">
+            <td th:text="${isa.getAtype.getValue()}">Тип товара</td>
+            <td th:text="${isa.getPrice}">Cтоимость</td>
+            <td th:text="${isa.getStatus.getValue()}">Наличие</td>
+            <td></td>
+        </tr>
+        <tr th:each="sa : ${soldAccessories}">
+            <td th:text="${sa.getAtype.getValue()}">Тип товара</td>
+            <td th:text="${sa.getPrice}">Cтоимость</td>
+            <td th:text="${sa.getStatus.getValue()}">Наличие</td>
+            <td><a th:href="@{'/customer/' + ${sa.getCustomer().getId()}}" th:text="${sa.getCustomer().getName()}" class="tableLink">Имя покупателя</a></td>
+        </tr>
+    </table>
+    <img th:src="@{/img/accessory.png}" alt="покупатель" />
+</main>
+<footer>
+    <hr class="hr-horizontal-gradient">
+    <h2>Контакты</h2>
+</footer>
+</body>
+</html>

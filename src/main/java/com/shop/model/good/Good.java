@@ -1,14 +1,10 @@
 package com.shop.model.good;
 
-import com.shop.model.Customer;
-import com.shop.model.Promotion;
-import com.shop.model.Shop;
+import com.shop.model.customer.Customer;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.UUID;
 
 

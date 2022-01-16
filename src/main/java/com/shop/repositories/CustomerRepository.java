@@ -1,6 +1,6 @@
 package com.shop.repositories;
 
-import com.shop.model.Customer;
+import com.shop.model.customer.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;

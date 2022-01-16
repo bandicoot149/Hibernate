@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная</title>
+    <link th:href="@{/styles/main.css}" href="../static/styles/main.css" rel="stylesheet">
+</head>
+<body>
+<header>
+    <h1><a th:href="@{'/'}" class="mainLink">Bike Shop</a></h1>
+</header>
+<hr class="hr-horizontal-gradient">
+<main>
+    <h2>Заполнить базу данных</h2>
+    <form method="post" th:action="@{'/dataGen/run'}" id="gen-param">
+        <label class="gen-line">Колличество велосипедов: <input class="number-input" name="bikesCount"/></label>
+        <label class="gen-line">Колличество аксессуаров: <input class="number-input" name="accessoriesCount"/></label>
+        <label class="gen-line">Колличество комплектующих: <input class="number-input" name="componentsCount"/></label>
+        <label class="gen-line">Колличество посетителей: <input class="number-input" name="customersCount"/></label>
+        <label class="gen-line">Колличество акций: <input class="number-input" name="promotionsCount"/></label>
+        <button type="submit">Заполнить</button>
+    </form>
+    <img th:src="@{/img/crocodile.png}" alt="крокодил" />
+</main>
+<footer>
+    <hr class="hr-horizontal-gradient">
+    <h2>Контакты</h2>
+</footer>
+</body>
+</html>

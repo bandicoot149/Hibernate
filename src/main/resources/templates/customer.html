@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Посетитель</title>
+    <link th:href="@{/styles/main.css}" href="../static/styles/main.css" rel="stylesheet">
+</head>
+<body>
+<header>
+    <h1><a th:href="@{'/'}" class="mainLink">Bike Shop</a></h1>
+</header>
+<hr class="hr-horizontal-gradient">
+<main>
+    <h2 th:text="${customer.getName}"></h2>
+    <h2>Покупки</h2>
+    <h2>Велосипеды</h2>
+    <table>
+        <tr>
+            <td>Бренд</td>
+            <td>Тип</td>
+            <td>Размер</td>
+            <td>Cтоимость</td>
+        </tr>
+        <tr th:each="sb : ${soldBikes}">
+            <td th:text="${sb.getBrand}">Бренд</td>
+            <td th:text="${sb.getBtype().getValue()}">Тип</td>
+            <td th:text="${sb.getFrame}">Размер</td>
+            <td th:text="${sb.getPrice}">Cтоимость</td>
+        </tr>
+    </table>
+    <h2>Комплектующие</h2>
+    <table>
+        <tr>
+            <td>Тип товара</td>
+            <td>Cтоимость</td>
+        </tr>
+        <tr th:each="sc : ${soldComponents}">
+            <td th:text="${sc.getCtype.getValue()}">Тип товара</td>
+            <td th:text="${sc.getPrice}">Cтоимость</td>
+        </tr>
+    </table>
+    <h2>Аксессуары</h2>
+    <table>
+        <tr>
+            <td>Тип товара</td>
+            <td>Cтоимость</td>
+        </tr>
+        </tr>
+        <tr th:each="sa : ${soldAccessories}">
+            <td th:text="${sa.getAtype.getValue()}">Тип товара</td>
+            <td th:text="${sa.getPrice}">Cтоимость</td>
+        </tr>
+    </table>
+</main>
+<footer>
+    <hr class="hr-horizontal-gradient">
+    <h2>Контакты</h2>
+</footer>
+</body>
+</html>
